@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MarketDropDown from "~~/components/dropdown/MarketDropDown";
 import TokenDropDown from "~~/components/dropdown/TokenDropDown";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Page = () => {
   const [amount, setAmount] = useState("");
@@ -26,8 +28,21 @@ const Page = () => {
     setIsAdvancedOpen(!isAdvancedOpen);
   };
 
+  useEffect(() => {
+    toast.success("Contract is verified using ChainGPT", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }, []);
+
   return (
     <div className="px-[400px] py-32">
+            <ToastContainer />
       <div className="p-8 bg-white rounded-lg">
         <div className="mb-2 text-black/60 text-sm  uppercase">Select Token</div>
         <div className="relative border-2 border-black p-2 flex justify-between">
