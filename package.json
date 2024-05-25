@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@chaingpt/ainews": "^0.0.8",
+    "@chaingpt/smartcontractauditor": "^0.0.1",
     "@types/chart.js": "^2.9.41",
     "chart.js": "^4.4.3",
     "react-chartjs-2": "^5.2.0",
