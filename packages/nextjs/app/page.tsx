@@ -1,23 +1,69 @@
 "use client";
 
+import React, { useState } from "react";
+import Image from "next/image";
 import type { NextPage } from "next";
 import { FaDiscord } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { useAccount } from "wagmi";
+import { FaArrowRightLong } from "react-icons/fa6";
+import Accordian from "~~/components/accordian/Accordian";
+import TechnicalAccordian from "~~/components/accordian/TechnicalAccordian";
+import UtilityAccordian from "~~/components/accordian/UtilityAccordian";
+import HeroButton from "~~/components/buttons/HeroButton";
 import InvestButton from "~~/components/buttons/InvestButton";
 import Feature from "~~/components/cards/Feature";
 import clock from "~~/public/features/clock.svg";
 import pool from "~~/public/features/pool.svg";
 import shield from "~~/public/features/shield.svg";
-import { FaArrowRightLong } from "react-icons/fa6";
+import coin from "~~/public/hero/coin.svg";
+import hand from "~~/public/hero/hand.svg";
+import pig from "~~/public/hero/pig.svg";
+import star from "~~/public/hero/star.svg";
+import invest from "~~/public/hero/invest.svg";
 
 const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+  const [selectedButton, setSelectedButton] = useState("General");
+  const buttonClass = (buttonName: string) =>
+    `font-medium leading-tight rounded-lg border-black text-black font-jakarta border-2 border-black px-3 py-2 ${
+      selectedButton === buttonName
+        ? "bg-[#46D3FF] text-black"
+        : "bg-[#ffffff] text-black hover:bg-[#ffffff] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+    }`;
 
   return (
     <div>
-      <div className="flex items-center w-full h-screen">
+      <div className="w-full h-[90vh] flex">
+        <div className="w-3/5 relative flex">
+          <div className="absolute top-[5.5rem] left-32">
+            <Image src={star} alt="hero" width={100} height={100} />
+          </div>
+          <div className="font-medium absolute top-20 left-64">
+            A DeFi savings account so easy to use - even your grandma can use it.
+          </div>
+          <div className="absolute top-24 left-60">
+            <span className="text-amber-300 text-[111px] font-extrabold font-jakarta text-shadow-black">Say</span>
+            <span className="text-pink-200 text-[111px] font-extrabold font-jakarta text-shadow-black">wings</span>
+          </div>
+          <div className="text-black text-[74px] font-light font-jakarta absolute top-60 left-60">Made Effortless</div>
+          <div className="absolute left-80 top-[28rem]">
+            <HeroButton text="Start investing" />
+          </div>
+        </div>
+        <div className="w-2/5 relative">
+          <div className="absolute right-0">
+            <Image src={hand} alt="hand" width={300} height={300} />
+          </div>
+          <div className="absolute right-48 top-32">
+            <Image src={coin} alt="coin" width={75} height={75} className="falling-coin" />
+          </div>
+
+          <div className="absolute bottom-0 right-36">
+            <Image src={pig} alt="pig" width={200} height={200} />
+          </div>
+        </div>
+      </div>
+      {/* <div className="flex items-center w-full h-screen">
         <div className="w-1/2 h-screen flex flex-col gap-4 pl-20 pr-4 pt-14">
           <div className="bg-[#FFCE51] rounded-lg h-[60vh] border-black font-jakarta border-2 hover:bg-[#FFCE51] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#FFCE51]"></div>
           <div className="bg-[#FFB9EC] rounded-lg h-[10vh] border-black font-jakarta border-2 hover:bg-[#FFB9EC] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#FFB9EC]"></div>
@@ -25,7 +71,7 @@ const Home: NextPage = () => {
         <div className="w-1/2 h-screen pr-20 pt-14">
           <div className="bg-[#d9a2fb] rounded-lg h-[72.3vh] border-black font-jakarta border-2 hover:bg-[#d9a2fb] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#d9a2fb]"></div>
         </div>
-      </div>
+      </div> */}
       <div className="h-[80vh] bg-[#FFB9EC]">
         <div className="flex pt-10 justify-center">
           <div className="text-zinc-800 text-2xl font-bold font-jakarta">
@@ -73,9 +119,9 @@ const Home: NextPage = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M1 5.917 5.724 10.5 15 1.5"
                   />
                 </svg>
@@ -143,12 +189,42 @@ const Home: NextPage = () => {
             </li>
           </ol>
         </div>
-        <div className="flex w-1/2 justify-center pt-20">Image Here</div>
+        <div className="flex w-1/2 justify-center pt-20">
+          <Image src={invest} alt="hero" width={600} height={600} className="rounded-lg border-2 border-black" />
+        </div>
       </div>
       <div className="pt-48">
         <div className="h-[80vh] bg-[#FFCE51] p-28 py-20">
           <div>
             <div className="text-zinc-800 text-2xl font-bold font-jakarta">FAQs</div>
+          </div>
+          <div className="flex gap-4 mt-10">
+            <button className={buttonClass("General")} onClick={() => setSelectedButton("General")}>
+              General
+            </button>
+            <button className={buttonClass("Utility")} onClick={() => setSelectedButton("Utility")}>
+              Utility
+            </button>
+            <button className={buttonClass("Technical")} onClick={() => setSelectedButton("Technical")}>
+              Technical
+            </button>
+          </div>
+          <div className="mt-8">
+            {selectedButton === "General" && (
+              <div>
+                <Accordian />
+              </div>
+            )}
+            {selectedButton === "Utility" && (
+              <div>
+                <UtilityAccordian />
+              </div>
+            )}
+            {selectedButton === "Technical" && (
+              <div>
+                <TechnicalAccordian />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -171,9 +247,7 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="flex items-center mt-6 gap-3 cursor-pointer">
-            <div className="text-black text-lg underline">
-              Start Investing!
-            </div>
+            <div className="text-black text-lg underline">Start Investing!</div>
             <FaArrowRightLong className="text-black h-6 w-6" />
           </div>
         </div>
