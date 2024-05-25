@@ -2,7 +2,7 @@ import aave from "../../nextjs/public/protocols/aave.svg";
 import curve from "../../nextjs/public/protocols/curve.svg";
 import compound from "../../nextjs/public/protocols/compound.svg";
 import justlend from "../../nextjs/public/protocols/justlend.webp";
-import layerBank from "../../nextjs/public/protocols/layerbank.svg";
+import layerBank from "../../nextjs/public/protocols/layerBank.svg";
 import { StaticImageData } from "next/image";
 
 export interface Protocol {
