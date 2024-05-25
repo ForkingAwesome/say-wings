@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import MarketDropDown from "~~/components/dropdown/MarketDropDown";
-import TokenDropDown from "~~/components/dropdown/TokenDropDown";
+import React, { useState } from "react";
+import { CompoundSupplyABI } from "../../utils/CompoundSupplyABI";
+import { addresses } from "../../utils/addresses";
+import { ethers } from "ethers";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import MarketDropDown from "~~/components/dropdown/MarketDropDown";
+import TokenDropDown from "~~/components/dropdown/TokenDropDown";
 
 const Page = () => {
   const [amount, setAmount] = useState("");
@@ -28,21 +29,19 @@ const Page = () => {
     setIsAdvancedOpen(!isAdvancedOpen);
   };
 
-  useEffect(() => {
-    toast.success("Contract is verified using ChainGPT", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }, []);
+  const deposit = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "sepolia");
+
+    await provider.send("eth_requestAccounts", []);
+    const accounts = await provider.listAccounts();
+    const signer = provider.getSigner(accounts[0]);
+    const supplyContract = new ethers.Contract(addresses.CompoundContractAddress, CompoundSupplyABI, signer);
+
+    await supplyContract.supply(addresses.USDCCompoundContract, "1000000");
+  };
 
   return (
     <div className="px-[400px] py-32">
-            <ToastContainer />
       <div className="p-8 bg-white rounded-lg">
         <div className="mb-2 text-black/60 text-sm  uppercase">Select Token</div>
         <div className="relative border-2 border-black p-2 flex justify-between">
@@ -77,12 +76,23 @@ const Page = () => {
             </>
           )}
           <button onClick={toggleAdvancedSettings} className="text-black/60 my-6 flex items-center gap-2 uppercase">
-            Advanced Settings {isAdvancedOpen ? <IoMdArrowDropup className="text-xl" />  : <IoMdArrowDropdown className="text-xl" />}
+            Advanced Settings{" "}
+            {isAdvancedOpen ? <IoMdArrowDropup className="text-xl" /> : <IoMdArrowDropdown className="text-xl" />}
           </button>
         </div>
-        <div className="bg-black text-white py-3 flex items-center gap-3 justify-center">Deposit</div>
+        <button
+          className="bg-black text-white py-3 flex items-center gap-3 justify-center"
+          onClick={() => {
+            deposit();
+          }}
+        >
+          Deposit
+        </button>
       </div>
-      <div className="text-[18px] font-semibold items-center gap-2 flex justify-center mt-10 text-green-800"><IoShieldCheckmark />The smart contracts at SayWings are <span className="underline">verified</span> by ChainGPT's Audit API and SDK.</div>
+      <div className="text-[18px] font-semibold items-center gap-2 flex justify-center mt-10 text-green-800">
+        <IoShieldCheckmark />
+        The smart contracts at SayWings are <span className="underline">verified</span> by ChainGPT's Audit API and SDK.
+      </div>
     </div>
   );
 };
