@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import MarketDropDown from "~~/components/dropdown/MarketDropDown";
-import TokenDropDown from "~~/components/dropdown/TokenDropDown";
+import { CompoundSupplyABI } from "../../utils/CompoundSupplyABI";
+import { addresses } from "../../utils/addresses";
+import { ethers } from "ethers";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import { IoShieldCheckmark } from "react-icons/io5";
+import MarketDropDown from "~~/components/dropdown/MarketDropDown";
+import TokenDropDown from "~~/components/dropdown/TokenDropDown";
 
 const Page = () => {
   const [amount, setAmount] = useState("");
@@ -24,6 +27,17 @@ const Page = () => {
 
   const toggleAdvancedSettings = () => {
     setIsAdvancedOpen(!isAdvancedOpen);
+  };
+
+  const deposit = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "sepolia");
+
+    await provider.send("eth_requestAccounts", []);
+    const accounts = await provider.listAccounts();
+    const signer = provider.getSigner(accounts[0]);
+    const supplyContract = new ethers.Contract(addresses.CompoundContractAddress, CompoundSupplyABI, signer);
+
+    await supplyContract.supply(addresses.USDCCompoundContract, "1000000");
   };
 
   return (
@@ -62,12 +76,23 @@ const Page = () => {
             </>
           )}
           <button onClick={toggleAdvancedSettings} className="text-black/60 my-6 flex items-center gap-2 uppercase">
-            Advanced Settings {isAdvancedOpen ? <IoMdArrowDropup className="text-xl" />  : <IoMdArrowDropdown className="text-xl" />}
+            Advanced Settings{" "}
+            {isAdvancedOpen ? <IoMdArrowDropup className="text-xl" /> : <IoMdArrowDropdown className="text-xl" />}
           </button>
         </div>
-        <div className="bg-black text-white py-3 flex items-center gap-3 justify-center">Deposit</div>
+        <button
+          className="bg-black text-white py-3 flex items-center gap-3 justify-center"
+          onClick={() => {
+            deposit();
+          }}
+        >
+          Deposit
+        </button>
       </div>
-      <div className="text-[18px] font-semibold items-center gap-2 flex justify-center mt-10 text-green-800"><IoShieldCheckmark />The smart contracts at SayWings are <span className="underline">verified</span> by ChainGPT's Audit API and SDK.</div>
+      <div className="text-[18px] font-semibold items-center gap-2 flex justify-center mt-10 text-green-800">
+        <IoShieldCheckmark />
+        The smart contracts at SayWings are <span className="underline">verified</span> by ChainGPT's Audit API and SDK.
+      </div>
     </div>
   );
 };
