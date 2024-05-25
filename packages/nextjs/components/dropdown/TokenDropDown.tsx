@@ -87,16 +87,16 @@ const TokenDropdown: React.FC = () => {
       <div>
         <button
           type="button"
-          className="inline-flex bg-black text-white items-center gap-2 justify-center w-full rounded-md border border-gray-300 shadow-sm p-3 text-sm font-medium hover:bg-black/70 focus:outline-none"
+          className="inline-flex bg-black  uppercase text-white items-center gap-2 justify-center w-full rounded-md border border-gray-300 shadow-sm p-3 text-sm font-medium hover:bg-black/70 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {selectedToken ? (
-            <div className="flex items-center">
+            <div className="flex items-center uppercase">
               <img src={selectedToken.logo} alt={selectedToken.name} className="w-5 h-5 mr-2" />
               {selectedToken.name}
             </div>
           ) : (
-            'Select Token'
+            'USDC'
           )}
           <IoIosArrowDown />
         </button>

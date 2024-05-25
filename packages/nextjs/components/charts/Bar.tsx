@@ -61,7 +61,7 @@ const ComparisonBarChart: React.FC<ComparisonBarChartProps> = ({ data }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4 bg-white rounded-lg">
+    <div className="max-w-lg mx-auto p-4 mt-10 bg-white rounded-lg">
       <Bar data={chartData} options={options} />
     </div>
   );

@@ -37,7 +37,7 @@ const PortfolioTable: React.FC = () => {
           <Image src={order.logo} width={30} height={30} alt={order.name} className="rounded-full"/>
           {order.name}
         </div>
-        <div className="text-black">${order.amountInvested}</div>
+        <div className="text-black">{order.amountInvested}</div>
         <div className="text-black">{order.apy}%</div>
         <div className="text-black">{order.earnedInterest}%</div>
         <div className="text-black">${order.totalInvestedValue}</div>

@@ -60,11 +60,14 @@ p {
   transform: translate(-50%, -50%);
   vertical-align: middle;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
   transition: all .5s;
   background-color: #FFCE51;
-  border: black;
+  border: 1px solid black;
 }
 
 .button::before {
@@ -76,6 +79,7 @@ p {
   left: 4.5px;
   transform: skewX(45deg);
   background-color: #3498db;
+  border: 1px solid black;
 }
 
 .button::after {
@@ -87,6 +91,7 @@ p {
   bottom: -4px;
   transform: skewY(45deg);
   background-color: #FFB9EC;
+  border: 1px solid black;
 }
 
 .button:active {

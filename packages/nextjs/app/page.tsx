@@ -99,7 +99,7 @@ const Home: NextPage = () => {
             img={shield}
             title={"Secure & Transparent"}
             subtitle={
-              "Your funds remain in your wallet, connected securely to Saywings. We prioritize transparency and user control."
+              "The Smart Contracts at SayWings are verified by ChainGPT's Audit API and SDK."
             }
             bgColor={"bg-[#46D3FF]"}
           />

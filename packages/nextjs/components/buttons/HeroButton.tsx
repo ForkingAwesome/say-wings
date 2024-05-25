@@ -6,7 +6,7 @@ interface InvestmentCardProps {
 
 const HeroButton: React.FC<InvestmentCardProps> = ({ text }) => {
   return (
-    <button className='bg-[#FFCE51] p-4 button font-jakarta'>{text}</button>
+    <button className='bg-[#FFCE51] p-4 button font-jakarta border-black'>{text}</button>
   );
 };
 
