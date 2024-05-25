@@ -221,6 +221,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chaingpt/smartcontractauditor@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@chaingpt/smartcontractauditor@npm:0.0.1"
+  dependencies:
+    "@types/node": ^20.10.4
+    axios: ^1.6.2
+  checksum: b7e469db612264d4c77c04bb2c5afa1a10476944e30068728876acbacfc172f1abaf04947ca732366632eafde5a9a204914e9c13b49e031afc2aa2e86d0e8cf9
+  languageName: node
+  linkType: hard
+
 "@chainsafe/as-sha256@npm:^0.3.1":
   version: 0.3.1
   resolution: "@chainsafe/as-sha256@npm:0.3.1"
@@ -2777,6 +2787,15 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: aa04366b9103b7d6cfd6b2ef64182e0eaa7d4462c3f817618486ea0422984c51fc69fd0d436eae6c9e696ddfdbec9ccaa27a917f7c2e8c75c5d57827fe3d95e8
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.10.4":
+  version: 20.12.12
+  resolution: "@types/node@npm:20.12.12"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 5373983874b9af7c216e7ca5d26b32a8d9829c703a69f1e66f2113598b5be8582c0e009ca97369f1ec9a6282b3f92812208d06eb1e9fc3bd9b939b022303d042
   languageName: node
   linkType: hard
 
@@ -12548,6 +12567,7 @@ __metadata:
   resolution: "se-2@workspace:."
   dependencies:
     "@chaingpt/ainews": ^0.0.8
+    "@chaingpt/smartcontractauditor": ^0.0.1
     "@types/chart.js": ^2.9.41
     chart.js: ^4.4.3
     husky: ^8.0.1
@@ -14083,6 +14103,13 @@ __metadata:
   version: 0.1.3
   resolution: "uncrypto@npm:0.1.3"
   checksum: 07160e08806dd6cea16bb96c3fd54cd70fc801e02fc3c6f86980144d15c9ebbd1c55587f7280a207b3af6cd34901c0d0b77ada5a02c2f7081a033a05acf409e2
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
   languageName: node
   linkType: hard
 
