@@ -18,9 +18,9 @@ import pool from "~~/public/features/pool.svg";
 import shield from "~~/public/features/shield.svg";
 import coin from "~~/public/hero/coin.svg";
 import hand from "~~/public/hero/hand.svg";
+import invest from "~~/public/hero/invest.svg";
 import pig from "~~/public/hero/pig.svg";
 import star from "~~/public/hero/star.svg";
-import invest from "~~/public/hero/invest.svg";
 
 const Home: NextPage = () => {
   const [selectedButton, setSelectedButton] = useState("General");
@@ -98,9 +98,7 @@ const Home: NextPage = () => {
           <Feature
             img={shield}
             title={"Secure & Transparent"}
-            subtitle={
-              "The Smart Contracts at SayWings are verified by ChainGPT's Audit API and SDK."
-            }
+            subtitle={"The Smart Contracts at SayWings are verified by ChainGPT's Audit API and SDK."}
             bgColor={"bg-[#46D3FF]"}
           />
         </div>
