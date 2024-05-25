@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
 
 interface Token {
@@ -8,39 +8,79 @@ interface Token {
 }
 
 const tokens: Token[] = [
-  { name: 'Bitcoin', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png' },
-  { name: 'Ethereum', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png' },
-  { name: 'Ripple', logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png' },
-  { name: 'USD Coin', logo: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png' },
-  { name: 'Dai', logo: 'https://cryptologos.cc/logos/dai-dai-logo.png' },
-  { name: 'Binance Coin', logo: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png' },
-  { name: 'Litecoin', logo: 'https://cryptologos.cc/logos/litecoin-ltc-logo.png' },
-  { name: 'Chainlink', logo: 'https://cryptologos.cc/logos/chainlink-link-logo.png' },
-  { name: 'Cardano', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png' },
-  { name: 'Stellar', logo: 'https://cryptologos.cc/logos/stellar-xlm-logo.png' },
-  { name: 'Polkadot', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png' },
-  { name: 'Bitcoin Cash', logo: 'https://cryptologos.cc/logos/bitcoin-cash-bch-logo.png' },
-  { name: 'Wrapped Bitcoin', logo: 'https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.png' },
-  { name: 'Ethereum Classic', logo: 'https://cryptologos.cc/logos/ethereum-classic-etc-logo.png' },
-  { name: 'Cosmos', logo: 'https://cryptologos.cc/logos/cosmos-atom-logo.png' },
-  { name: 'Dogecoin', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.png' },
-  { name: 'Filecoin', logo: 'https://cryptologos.cc/logos/filecoin-fil-logo.png' },
-  { name: 'Aave', logo: 'https://cryptologos.cc/logos/aave-aave-logo.png' },
-  { name: 'Uniswap', logo: 'https://cryptologos.cc/logos/uniswap-uni-logo.png' },
-  { name: 'Synthetix', logo: 'https://cryptologos.cc/logos/synthetix-network-token-snx-logo.png' }
+  { name: 'Bitcoin', logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg' },
+  { name: 'Ethereum', logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg' },
+  { name: 'Ripple', logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.svg' },
+  { name: 'USD Coin', logo: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.svg' },
+  { name: 'Dai', logo: 'https://cryptologos.cc/logos/dai-dai-logo.svg' },
+  { name: 'Binance Coin', logo: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.svg' },
+  { name: 'Litecoin', logo: 'https://cryptologos.cc/logos/litecoin-ltc-logo.svg' },
+  { name: 'Chainlink', logo: 'https://cryptologos.cc/logos/chainlink-link-logo.svg' },
+  { name: 'Cardano', logo: 'https://cryptologos.cc/logos/cardano-ada-logo.svg' },
+  { name: 'Stellar', logo: 'https://cryptologos.cc/logos/stellar-xlm-logo.svg' },
+  { name: 'Polkadot', logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.svg' },
+  { name: 'Bitcoin Cash', logo: 'https://cryptologos.cc/logos/bitcoin-cash-bch-logo.svg' },
+  { name: 'Wrapped Bitcoin', logo: 'https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg' },
+  { name: 'Ethereum Classic', logo: 'https://cryptologos.cc/logos/ethereum-classic-etc-logo.svg' },
+  { name: 'Cosmos', logo: 'https://cryptologos.cc/logos/cosmos-atom-logo.svg' },
+  { name: 'Dogecoin', logo: 'https://cryptologos.cc/logos/dogecoin-doge-logo.svg' },
+  { name: 'Filecoin', logo: 'https://cryptologos.cc/logos/filecoin-fil-logo.svg' },
+  { name: 'Aave', logo: 'https://cryptologos.cc/logos/aave-aave-logo.svg' },
+  { name: 'Uniswap', logo: 'https://cryptologos.cc/logos/uniswap-uni-logo.svg' },
+  { name: 'Synthetix', logo: 'https://cryptologos.cc/logos/synthetix-network-token-snx-logo.svg' }
 ];
 
 const TokenDropdown: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-
-  const filteredTokens = tokens.filter(token =>
-    token.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [selectedToken, setSelectedToken] = useState<Token | null>(null);
+  const [filteredTokens, setFilteredTokens] = useState<Token[]>(tokens);
 
   const handleInputClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.stopPropagation();
   };
+
+  const handleTokenSelect = useCallback((token: Token) => {
+    setSelectedToken(token);
+    setIsOpen(false);
+  }, []);
+
+  const debounce = (func: (...args: any[]) => void, wait: number) => {
+    let timeout: ReturnType<typeof setTimeout>;
+    return (...args: any[]) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  };
+
+  const handleSearchChange = useCallback(
+    debounce((search: string) => {
+      setFilteredTokens(
+        tokens.filter(token => token.name.toLowerCase().includes(search.toLowerCase()))
+      );
+    }, 300),
+    []
+  );
+
+  useEffect(() => {
+    handleSearchChange(searchTerm);
+  }, [searchTerm, handleSearchChange]);
+
+  const MemoizedTokenList = memo(({ tokens }: { tokens: Token[] }) => (
+    <>
+      {tokens.map((token) => (
+        <div
+          key={token.name}
+          className="flex items-center px-4 py-2 text-sm text-white hover:bg-black/70 cursor-pointer"
+          role="menuitem"
+          onClick={() => handleTokenSelect(token)}
+        >
+          <img src={token.logo} alt={token.name} className="w-5 h-5 mr-2" />
+          {token.name}
+        </div>
+      ))}
+    </>
+  ));
 
   return (
     <div className="relative inline-block text-left w-48">
@@ -50,7 +90,14 @@ const TokenDropdown: React.FC = () => {
           className="inline-flex bg-black text-white items-center gap-2 justify-center w-full rounded-md border border-gray-300 shadow-sm p-3 text-sm font-medium hover:bg-black/70 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          Select Token
+          {selectedToken ? (
+            <div className="flex items-center">
+              <img src={selectedToken.logo} alt={selectedToken.name} className="w-5 h-5 mr-2" />
+              {selectedToken.name}
+            </div>
+          ) : (
+            'Select Token'
+          )}
           <IoIosArrowDown />
         </button>
       </div>
@@ -65,17 +112,7 @@ const TokenDropdown: React.FC = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               onClick={handleInputClick}
             />
-            {filteredTokens.map((token) => (
-              <a
-                key={token.name}
-                href="#"
-                className="flex items-center px-4 py-2 text-sm text-white hover:bg-black/70"
-                role="menuitem"
-              >
-                <img src={token.logo} alt={token.name} className="w-5 h-5 mr-2" />
-                {token.name}
-              </a>
-            ))}
+            <MemoizedTokenList tokens={filteredTokens} />
           </div>
         </div>
       )}

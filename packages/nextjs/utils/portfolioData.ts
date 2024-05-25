@@ -4,59 +4,55 @@ import compound from "../../nextjs/public/protocols/compound.svg";
 import justlend from "../../nextjs/public/protocols/justlend.webp";
 import layerBank from "../../nextjs/public/protocols/layerBank.svg";
 import { StaticImageData } from "next/image";
+import exp from "constants";
 
 export interface Protocol {
   id: number;
   logo: StaticImageData;
   name: string;
-  type: string;
-  tvl: string;
+  amountInvested: string;
   apy: number;
-  openSource: number;
-  audited: number;
+  earnedInterest: number;
+  totalInvestedValue: number;
 }
 
-const dummyData: Protocol[] = [
+const portfolioData: Protocol[] = [
   {
     id: 1,
     logo: aave,
     name: "Aave",
-    type: "Lending",
-    tvl: "$12.971B",
-    apy: 7.106,
-    openSource: 1,
-    audited: 1,
+    amountInvested: "$0.00",
+    apy: 0,
+    earnedInterest: 0,
+    totalInvestedValue: 0,
+  },
+  {
+    id: 2,
+    logo: compound,
+    name: "Compound",
+    amountInvested: "$0.00",
+    apy: 0,
+    earnedInterest: 0,
+    totalInvestedValue: 0,
   },
   {
     id: 3,
-    logo: compound,
-    name: "Compound Finance",
-    type: "Lending",
-    tvl: "$2.581B",
-    apy: 6.4,
-    openSource: 1,
-    audited: 1,
+    logo: justlend,
+    name: "JustLend",
+    amountInvested: "$0.00",
+    apy: 0,
+    earnedInterest: 0,
+    totalInvestedValue: 0,
   },
   {
     id: 4,
-    logo: justlend,
-    name: "JustLend",
-    type: "Lending",
-    tvl: "$6.64B",
-    apy: 5.427,
-    openSource: 1,
-    audited: 1,
-  },
-  {
-    id: 5,
     logo: layerBank,
     name: "LayerBank",
-    type: "Lending",
-    tvl: "$603.5M",
-    apy: 0.01962,
-    openSource: 1,
-    audited: 1,
+    amountInvested: "$0.00",
+    apy: 0,
+    earnedInterest: 0,
+    totalInvestedValue: 0,
   },
-];
+]
 
-export default dummyData;
+export default portfolioData;

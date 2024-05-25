@@ -8,9 +8,15 @@ import { IoMdArrowDropup } from "react-icons/io";
 
 const Page = () => {
   const [amount, setAmount] = useState("");
+  const [amountNew, setAmountNew] = useState("");
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   const handleAmountChange = (e: any) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setAmount(value);
+  };
+
+  const handleAmountChangeNew = (e: any) => {
     const value = e.target.value.replace(/\D/g, "");
     setAmount(value);
   };
@@ -46,8 +52,8 @@ const Page = () => {
                 <div className="text-black/60 w-[20rem] flex items-center">Minimum Yield Rate</div>
                 <input
                   type="text"
-                  value={amount}
-                  onChange={handleAmountChange}
+                  value={amountNew}
+                  onChange={handleAmountChangeNew}
                   className="inset-0 bg-transparent w-full text-right px-4 py-2 text-xl font-medium focus:outline-none"
                   placeholder="Enter Amount"
                 />
