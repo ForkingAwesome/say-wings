@@ -15,6 +15,13 @@ Saywings is your **one-stop shop** for effortless crypto growth. Stop stressing 
 ---
 **To test the repo locally, follow these steps:**
 
+---
+Once you deposit the funds, you can mint an NFT that stores the amount invested and the protocol that the tokens were lent to. This is how it should look:
+
+<img height="500" src="https://github.com/ForkingAwesome/say-wings/assets/94619028/9cf43984-0831-4d02-9388-14513049dc41">  </img>
+
+---
+
 Saywings is open-source under the MIT License. We believe in building a **legendary DeFi community** together. Here's how to join the rebellion:
 
 1.  **Clone the repository:**
