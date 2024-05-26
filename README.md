@@ -8,7 +8,7 @@ Saywings is your **one-stop shop** for effortless crypto growth. Stop stressing 
 ---
 **How to Use the Saywings App:**
 
-1.  **Visit our website:**  [https://www.sabeswings.org/](https://www.sabeswings.org/) - It's easier than navigating the Death Star.
+1.  **Visit our website:**  [https://www.say-wings.vercel.app](https://www.say-wings.vercel.app) - It's easier than navigating the Death Star.
 2.  **Connect your wallet.** - Your crypto is safe with Saywings, unlike Rey's lightsaber skills.
 3.  **Select your cryptocurrencies.** - Choose your fighters (coins) and dominate the crypto arena!
 4.  **Sit back and relax!** Saywings automatically optimizes your portfolio for maximum yield. - Just chill like Baby Yoda while your crypto grows.
