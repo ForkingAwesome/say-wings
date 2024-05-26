@@ -16,14 +16,36 @@ const Page = () => {
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   const handleAmountChange = (e: any) => {
-    const value = e.target.value.replace(/\D/g, "");
+    let value = e.target.value;
+  
+    // Remove all non-numeric characters except for the first decimal point
+    value = value.replace(/[^0-9.]/g, "");
+  
+    // Remove additional decimal points if any
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+  
     setAmount(value);
   };
+  
 
   const handleAmountChangeNew = (e: any) => {
-    const value = e.target.value.replace(/\D/g, "");
+    let value = e.target.value;
+  
+    // Remove all non-numeric characters except for the first decimal point
+    value = value.replace(/[^0-9.]/g, "");
+  
+    // Remove additional decimal points if any
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+  
     setAmount(value);
   };
+  
 
   const toggleAdvancedSettings = () => {
     setIsAdvancedOpen(!isAdvancedOpen);
@@ -81,7 +103,7 @@ const Page = () => {
           </button>
         </div>
         <button
-          className="bg-black text-white py-3 flex items-center gap-3 justify-center"
+          className="bg-black text-white py-3 w-full flex items-center gap-3 justify-center"
           onClick={() => {
             deposit();
           }}
