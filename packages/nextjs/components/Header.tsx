@@ -33,6 +33,11 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/apps",
     icon: <></>,
   },
+  {
+    label: "News",
+    href: "/news",
+    icon: <></>,
+  },
 ];
 
 export const HeaderMenuLinks = () => {
