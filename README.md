@@ -38,7 +38,10 @@ Saywings is open-source under the MIT License. We believe in building a **legend
 
 ## **Tech stack used**
 
-Saywings was made with love, in [Figma](https://www.figma.com/design/vMvf6HmPnrpsmG7dmWXPK7/sayWings?node-id=211-1612&t=D7odBSN8MPXiRW6g-1), and built with - Backend: NodeJS, ExpressJS; Frontend: Next, TypeScript, Tailwind css, DaisyUI; Blockend: Solidity, Aave, Compound, DefiLlama
+Saywings was made with love, in [Figma](https://www.figma.com/design/vMvf6HmPnrpsmG7dmWXPK7/sayWings?node-id=211-1612&t=D7odBSN8MPXiRW6g-1), and built with - 
+Backend: NodeJS, ExpressJS, Alchemy; 
+Frontend: Next, TypeScript, Tailwind css, DaisyUI; 
+Blockend: Solidity, Aave, Compound, DefiLlama, OpenZeppelin Wizard;
 
 ---
 ## **License**
