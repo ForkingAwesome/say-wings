@@ -66,6 +66,22 @@ const TokenDropdown: React.FC = () => {
     handleSearchChange(searchTerm);
   }, [searchTerm, handleSearchChange]);
 
+  const MemoizedTokenList = memo(({ tokens }: { tokens: Token[] }) => (
+    <>
+      {tokens.map((token) => (
+        <div
+          key={token.name}
+          className="flex items-center px-4 py-2 text-sm text-white hover:bg-black/70 cursor-pointer"
+          role="menuitem"
+          onClick={() => handleTokenSelect(token)}
+        >
+          <img src={token.logo} alt={token.name} className="w-5 h-5 mr-2" />
+          {token.name}
+        </div>
+      ))}
+    </>
+  ));
+
   return (
     <div className="relative inline-block text-left w-48">
       <div>
