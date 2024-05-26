@@ -54,7 +54,6 @@ const NewsPage: React.FC = () => {
     );
   }
 
-  // Once data is fetched, render news cards
   return (
     <div className="container mx-auto py-8 px-8 border-2 border-black">
       <h1 className="text-3xl font-bold mb-4">Latest News</h1>
