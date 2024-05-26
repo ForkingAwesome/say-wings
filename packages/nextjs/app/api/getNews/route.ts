@@ -7,7 +7,8 @@ const ainews = new AINews({
 
 export async function GET(req: NextRequest, res: NextResponse) {
     try {
-        const response = await ainews.getNews({});
+        const response = await ainews.getNews({  categoryId: [6], // Search AI News against specific category i.e NFT, Blockchain, DEFI etc
+    });
         const news = JSON.stringify(response.data);
         return new NextResponse(news, { status: 200 });
     } catch (error) {
