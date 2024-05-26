@@ -32,6 +32,7 @@ Saywings is open-source under the MIT License. We believe in building a **legend
 -   **Polygon zkEVM Cardano:** `0xfB2E1C4e4A42B5aF6C8fC93F501d0f5dDC7C66CD`
 -   **Manta:** `0x5bC85ba4aaA4433238Ca8D437021B48D059225cD`
 -   **Sepolia:** `0xAc5EE7BBCCc39A5872b73e443f8893425DE3EdF6`
+-   **Contract address for the NFT receipt:** [Explore contract](https://sepolia.etherscan.io/token/0xe82e3ad0cb7b79e201f7f839efc3f8f13722da9f)
  
 4.  **Test and contribute! May the forks be with you!**
 ---
