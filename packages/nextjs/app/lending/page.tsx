@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { CompoundSupplyABI } from "../../utils/CompoundSupplyABI";
 import { addresses } from "../../utils/addresses";
+import { nftAbi } from "../../utils/nftAbi";
 import { ethers } from "ethers";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
@@ -62,6 +63,18 @@ const Page = () => {
     await supplyContract.supply(addresses.USDCCompoundContract, "1000000");
   };
 
+  const mintReceiptNft = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "sepolia");
+
+    await provider.send("eth_requestAccounts", []);
+    const accounts = await provider.listAccounts();
+    const signer = provider.getSigner(accounts[0]);
+    const mintContract = new ethers.Contract(addresses.SepoliaNftAddress, nftAbi, signer);
+
+    const tx = await mintContract.safeMint(accounts[0], 1);
+    console.log(tx);
+  };
+
   return (
     <div className="px-[400px] py-32">
       <div className="p-8 bg-white rounded-lg">
@@ -109,6 +122,14 @@ const Page = () => {
           }}
         >
           Deposit
+        </button>
+        <button
+          className="bg-black text-white py-3 flex items-center gap-3 justify-center"
+          onClick={() => {
+            mintReceiptNft();
+          }}
+        >
+          Mint
         </button>
       </div>
       <div className="text-[18px] font-semibold items-center gap-2 flex justify-center mt-10 text-green-800">
